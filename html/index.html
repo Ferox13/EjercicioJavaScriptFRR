@@ -2,14 +2,51 @@
 <html>
     <head lang="es">
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title></title>
-        <meta name="description" content>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="../css/styles.css">
+        <title>ParejasFRR</title>
     </head>
     <body>
-        <div id="button-container"></div>
-      <script src="../js/script.js"></script>
+        <h1>BUSCAR PAREJAS FERNANDO RODRIGUEZ RODRIGUEZ</h1>
+        <section class="layout">
+            <div>
+                <h2>Número de intentos</h2>
+                <spa>0</spa>
+                <h2>Parejas restantes</h2>
+                <span>0</span>
+            </div>
+            <div id="button-container"></div>
+            <div>
+                <h2>Difucultad</h2>
+                <div class="radio-group vertical">
+                    <label>
+                        <input type="radio" name="difficulty" value="Fácil">
+                        Fácil
+                    </label>
+                    <label>
+                        <input type="radio" name="difficulty" value="Medio">
+                        Medio
+                    </label>
+                    <label>
+                        <input type="radio" name="difficulty" value="Dificil">
+                        Difícil
+                    </label>
+                    <label>
+                        <input type="radio" name="difficulty" value="Custom">
+                        Custom
+                    </label>
+                </div>
+                <div class="customDifficulty">
+                    <label for="rows">Filas</label>
+                    <input id="rows">
+                    <label for="columns">Columnas</label>
+                    <input id="columns">
+                    <button class="buttonDifficulty">Seleccionar dificultad</button>
+                </div>
+            </div>
+
+        </section>
+
+        <script src="../js/script.js"></script>
     </body>
 </html>
