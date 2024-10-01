@@ -20,19 +20,23 @@
                 <h2>Difucultad</h2>
                 <div class="radio-group vertical">
                     <label>
-                        <input type="radio" name="difficulty" value="Fácil">
+                        <input id="easyRadio" type="radio" name="difficulty"
+                            value="easy" checked>
                         Fácil
                     </label>
                     <label>
-                        <input type="radio" name="difficulty" value="Medio">
+                        <input id="mediumRadio" type="radio" name="difficulty"
+                            value="medium">
                         Medio
                     </label>
                     <label>
-                        <input type="radio" name="difficulty" value="Dificil">
+                        <input id="difRadio" type="radio" name="difficulty"
+                            value="hard">
                         Difícil
                     </label>
                     <label>
-                        <input type="radio" name="difficulty" value="Custom">
+                        <input id="customRadio" type="radio" name="difficulty"
+                            value="Custom">
                         Custom
                     </label>
                 </div>
@@ -41,7 +45,8 @@
                     <input id="rows">
                     <label for="columns">Columnas</label>
                     <input id="columns">
-                    <button class="buttonDifficulty">Seleccionar dificultad</button>
+                    <button id="customDifBtn"
+                        class="buttonDifficulty">Seleccionar dificultad</button>
                 </div>
             </div>
 
