@@ -1,8 +1,12 @@
 const container = document.getElementById("button-container");
+const rowInput = document.getElementById("rows");
+const colInput = document.getElementById("columns");
+const error = document.getElementById("error");
+const selectDif = document.getElementById("customDifBtn");
+
 let difficulty = "easy";
 let row = 3;
 let column = 4;
-const selectDif = document.getElementById("customDifBtn");
 
 function createButtons(rows, cols) {
   container.innerHTML = "";
@@ -13,32 +17,60 @@ function createButtons(rows, cols) {
       container.appendChild(button);
     }
   }
+  initInputText();
 }
+const initInputText = () => {
+  rowInput.value = row;
+  colInput.value = column;
+};
+const changeInputText = () => {
+  row = rowInput.value;
+  column = colInput.value;
+};
 
 createButtons(row, column);
 
 selectDif.addEventListener("click", () => {
-  checkDifficulty();
-  createButtons(row, column);
+  error.textContent = "";
+  if (difficulty === "custom") {
+    checkCustom();
+  } else {
+    changeInputText();
+    checkDifficulty();
+    createButtons(row, column);
+  }
 });
+const checkCustom = () => {
+  if ((rowInput.value * colInput.value) % 2 === 0) {
+    changeInputText();
+    createButtons(row, column);
+  } else {
+    error.textContent = "Tiene que ser un número par";
+  }
+};
 const checkDifficulty = () => {
-  console.log("entro");
   const radioButtons = document.querySelectorAll('input[type="radio"]');
   radioButtons.forEach((radio) => {
     radio.addEventListener("change", (event) => {
       difficulty = event.target.value;
       switch (difficulty) {
         case "easy":
-          row = 3;
-          column = 4;
+          rowInput.value = 3;
+          colInput.value = 4;
+          changeInputText();
           break;
         case "medium":
-          row = 4;
-          column = 5;
+          rowInput.value = 4;
+          colInput.value = 5;
+          changeInputText();
           break;
         case "hard":
-          row = 6;
-          column = 6;
+          rowInput.value = 6;
+          colInput.value = 6;
+          changeInputText();
+          break;
+        case "custom":
+          checkCustom();
           break;
       }
     });

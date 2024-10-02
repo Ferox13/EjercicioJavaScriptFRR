@@ -36,15 +36,16 @@
                     </label>
                     <label>
                         <input id="customRadio" type="radio" name="difficulty"
-                            value="Custom">
+                            value="custom">
                         Custom
                     </label>
                 </div>
                 <div class="customDifficulty">
                     <label for="rows">Filas</label>
-                    <input id="rows">
+                    <input id="rows" type="number" min="0">
                     <label for="columns">Columnas</label>
-                    <input id="columns">
+                    <input id="columns" type="number" min="0">
+                    <span id="error" class="error"></span>
                     <button id="customDifBtn"
                         class="buttonDifficulty">Seleccionar dificultad</button>
                 </div>

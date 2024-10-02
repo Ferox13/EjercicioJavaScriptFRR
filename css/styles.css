@@ -1,3 +1,4 @@
+
 body {
     display: flex;
     justify-content: center;
@@ -5,6 +6,11 @@ body {
     align-items: center;
     background-color: #353935;
 }
+#error {
+    display: block;
+    color: red;
+    margin: 5px 0 0 0;
+  }
 .radio-group.vertical {
     display: flex;
     flex-direction: column;
@@ -46,11 +52,9 @@ body {
 .button {
     text-transform: uppercase;
     cursor: pointer;
-    font-size: 20px;
     letter-spacing: 4px;
     position: relative;
     background-color: #16a085;
-    border: none;
     color: #fff;
     padding: 20px;
     text-align: center;
@@ -64,7 +68,6 @@ body {
     vertical-align: middle;
     margin-bottom: 0.1em;
     border: 2px solid #000;
-
 }
 
 .button:hover {
