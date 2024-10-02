@@ -11,9 +11,9 @@
         <section class="layout">
             <div>
                 <h2>Número de intentos</h2>
-                <spa>0</spa>
+                <spa id="intentos">0</spa>
                 <h2>Parejas restantes</h2>
-                <span>0</span>
+                <span id="parejas">0</span>
             </div>
             <div id="button-container"></div>
             <div>
@@ -42,9 +42,9 @@
                 </div>
                 <div class="customDifficulty">
                     <label for="rows">Filas</label>
-                    <input id="rows" type="number" min="0">
+                    <input id="rows" type="number" min="0" disabled>
                     <label for="columns">Columnas</label>
-                    <input id="columns" type="number" min="0">
+                    <input id="columns" type="number" min="0" disabled>
                     <span id="error" class="error"></span>
                     <button id="customDifBtn"
                         class="buttonDifficulty">Seleccionar dificultad</button>

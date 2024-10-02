@@ -1,24 +1,77 @@
+//TODO Crear mensaje de error, mensaje de acierto y mantener un tiempo los números en los botones
 const container = document.getElementById("button-container");
 const rowInput = document.getElementById("rows");
 const colInput = document.getElementById("columns");
 const error = document.getElementById("error");
 const selectDif = document.getElementById("customDifBtn");
-
+const numIntentos = document.getElementById("intentos");
+const numParejas = document.getElementById("parejas");
+let btnPair1;
+let btnPair2;
+let numTry = 0;
+let numOfPairs;
 let difficulty = "easy";
 let row = 3;
 let column = 4;
+let pairOne = 0;
+let pairTwo = 0;
 
 function createButtons(rows, cols) {
+  let contId = 0;
   container.innerHTML = "";
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
       const button = document.createElement("button");
+      button.id = contId++;
       button.classList.add("button");
+      button.addEventListener("click", handleButtonClick);
       container.appendChild(button);
     }
   }
   initInputText();
+  numTry = 0;
+  numIntentos.innerText = numTry;
 }
+const checkPairs = () => {
+  numTry++;
+  numIntentos.innerText = numTry;
+  if (pairOne === pairTwo) {
+    btnPair1.disabled = true;
+    btnPair2.disabled = true;
+    btnPair1.classList.toggle("button-active");
+    btnPair2.classList.toggle("button-active");
+    btnPair1.textContent = btnPair1.target;
+    btnPair2.textContent = btnPair2.target;
+    //btnPair1.classList.remove('button');
+    //btnPair2.classList.remove('button');
+    numOfPairs--;
+    numParejas.innerText = numOfPairs;
+    pairOne = 0;
+    pairTwo = 0;
+  } else {
+   
+    pairOne = 0;
+    pairTwo = 0;
+  }
+};
+const handleButtonClick = (event) => {
+  const button = event.target;
+  button.textContent=button.target;
+  if (pairTwo === 0 && pairOne != 0 && button !== btnPair1) {
+    pairTwo = parseInt(button.target);
+    btnPair2 = button;
+  }
+
+  if (pairOne === 0) {
+    pairOne = parseInt(button.target);
+    btnPair1 = button;
+  }
+
+  if (pairOne != 0 && pairTwo != 0) {
+    checkPairs();
+  }
+};
+
 const initInputText = () => {
   rowInput.value = row;
   colInput.value = column;
@@ -38,12 +91,14 @@ selectDif.addEventListener("click", () => {
     changeInputText();
     checkDifficulty();
     createButtons(row, column);
+    setPairsToButtons();
   }
 });
 const checkCustom = () => {
   if ((rowInput.value * colInput.value) % 2 === 0) {
     changeInputText();
     createButtons(row, column);
+    setPairsToButtons();
   } else {
     error.textContent = "Tiene que ser un número par";
   }
@@ -58,49 +113,62 @@ const checkDifficulty = () => {
           rowInput.value = 3;
           colInput.value = 4;
           changeInputText();
+          disabledInputs();
           break;
         case "medium":
           rowInput.value = 4;
           colInput.value = 5;
           changeInputText();
+          disabledInputs();
           break;
         case "hard":
           rowInput.value = 6;
           colInput.value = 6;
           changeInputText();
+          disabledInputs();
           break;
         case "custom":
-          checkCustom();
+          //checkCustom();
+          enableInputs();
           break;
       }
     });
   });
 };
+const enableInputs = () => {
+  rowInput.disabled = false;
+  colInput.disabled = false;
+};
+const disabledInputs = () => {
+  rowInput.disabled = true;
+  colInput.disabled = true;
+};
 checkDifficulty();
-//TODO Generar parejas de numero según las filas por columnas
 const generatePairs = () => {
+  const pairs = (row * column) / 2;
+  numOfPairs = pairs;
+  numParejas.innerText = pairs;
   const numbers = [];
-  for (let i = 0; i < 6; i++) {
-    const randomNumber = Math.floor(Math.random() * 12) + 1;
-    numbers.push(randomNumber, randomNumber);
+
+  for (let i = 1; i <= pairs; i++) {
+    numbers.push(i, i);
   }
+
+  for (let i = numbers.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [numbers[i], numbers[j]] = [numbers[j], numbers[i]];
+  }
+
   return numbers;
 };
-const randomPairsANum = (array) => {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
-};
 const setPairsToButtons = () => {
-  let nums = randomPairsANum(generatePairs());
+  let nums = generatePairs();
   const buttons = document.querySelectorAll("button:not(#customDifBtn)");
   let cont = 0;
   buttons.forEach((button) => {
-    button.textContent = nums[cont];
+    //button.textContent = nums[cont];
+    button.target = nums[cont];
     cont++;
   });
 };
-
 setPairsToButtons();
