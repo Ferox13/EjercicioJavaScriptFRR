@@ -5,7 +5,11 @@ body {
     align-items: center;
     background-color: #353935;
 }
+#msgTry{
+margin: 5px;
+color: white;
 
+}
 #error {
     display: block;
     color: red;

@@ -1,4 +1,3 @@
-//TODO Crear mensaje de error, mensaje de acierto y mantener un tiempo los números en los botones
 const container = document.getElementById("button-container");
 const rowInput = document.getElementById("rows");
 const colInput = document.getElementById("columns");
@@ -6,6 +5,7 @@ const error = document.getElementById("error");
 const selectDif = document.getElementById("customDifBtn");
 const numIntentos = document.getElementById("intentos");
 const numParejas = document.getElementById("parejas");
+const msgTry = document.getElementById("msgTry");
 let btnPair1;
 let btnPair2;
 let numTry = 0;
@@ -16,6 +16,12 @@ let column = 4;
 let pairOne = 0;
 let pairTwo = 0;
 
+const accertMsg = () => {
+  msgTry.innerText = "Los números seleccionados son iguales";
+};
+const failMsg = () => {
+  msgTry.innerText = "Los números seleccionados son distintos";
+};
 function createButtons(rows, cols) {
   let contId = 0;
   container.innerHTML = "";
@@ -42,29 +48,37 @@ const checkPairs = () => {
     btnPair2.classList.toggle("button-active");
     btnPair1.textContent = btnPair1.target;
     btnPair2.textContent = btnPair2.target;
-    //btnPair1.classList.remove('button');
-    //btnPair2.classList.remove('button');
     numOfPairs--;
     numParejas.innerText = numOfPairs;
     pairOne = 0;
     pairTwo = 0;
+    accertMsg();
+    setTimeout(() => {
+      msgTry.innerText = "";
+    }, 1000);
   } else {
-   
-    pairOne = 0;
-    pairTwo = 0;
+    failMsg();
+    setTimeout(() => {
+      msgTry.innerText = "";
+      btnPair1.textContent = "";
+      btnPair2.textContent = "";
+      pairOne = 0;
+      pairTwo = 0;
+    }, 1000);
   }
 };
 const handleButtonClick = (event) => {
   const button = event.target;
-  button.textContent=button.target;
   if (pairTwo === 0 && pairOne != 0 && button !== btnPair1) {
     pairTwo = parseInt(button.target);
     btnPair2 = button;
+    btnPair2.textContent = button.target;
   }
 
   if (pairOne === 0) {
     pairOne = parseInt(button.target);
     btnPair1 = button;
+    btnPair1.textContent = button.target;
   }
 
   if (pairOne != 0 && pairTwo != 0) {
