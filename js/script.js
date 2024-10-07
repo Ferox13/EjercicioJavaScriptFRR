@@ -15,6 +15,7 @@ let row = 3;
 let column = 4;
 let pairOne = 0;
 let pairTwo = 0;
+let checking = false;
 
 const accertMsg = () => {
   msgTry.innerText = "Los números seleccionados son iguales";
@@ -55,6 +56,7 @@ const checkPairs = () => {
     accertMsg();
     setTimeout(() => {
       msgTry.innerText = "";
+      checking=false;
     }, 1000);
   } else {
     failMsg();
@@ -64,10 +66,16 @@ const checkPairs = () => {
       btnPair2.textContent = "";
       pairOne = 0;
       pairTwo = 0;
+      checking=false;
     }, 1000);
   }
 };
 const handleButtonClick = (event) => {
+  //chekea para que no se pueda clicar mientras estan los 2 botones activos
+  if (checking) {
+    return;
+  }
+
   const button = event.target;
   if (pairTwo === 0 && pairOne != 0 && button !== btnPair1) {
     pairTwo = parseInt(button.target);
@@ -82,6 +90,7 @@ const handleButtonClick = (event) => {
   }
 
   if (pairOne != 0 && pairTwo != 0) {
+    checking = true;
     checkPairs();
   }
 };
@@ -121,6 +130,7 @@ const checkDifficulty = () => {
   const radioButtons = document.querySelectorAll('input[type="radio"]');
   radioButtons.forEach((radio) => {
     radio.addEventListener("change", (event) => {
+      error.textContent = "";
       difficulty = event.target.value;
       switch (difficulty) {
         case "easy":
@@ -142,7 +152,6 @@ const checkDifficulty = () => {
           disabledInputs();
           break;
         case "custom":
-          //checkCustom();
           enableInputs();
           break;
       }
@@ -180,7 +189,6 @@ const setPairsToButtons = () => {
   const buttons = document.querySelectorAll("button:not(#customDifBtn)");
   let cont = 0;
   buttons.forEach((button) => {
-    //button.textContent = nums[cont];
     button.target = nums[cont];
     cont++;
   });
