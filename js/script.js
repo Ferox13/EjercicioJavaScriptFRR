@@ -56,7 +56,7 @@ const checkPairs = () => {
     accertMsg();
     setTimeout(() => {
       msgTry.innerText = "";
-      checking=false;
+      checking = false;
     }, 1000);
   } else {
     failMsg();
@@ -68,7 +68,7 @@ const checkPairs = () => {
       btnPair2.textContent = "";
       pairOne = 0;
       pairTwo = 0;
-      checking=false;
+      checking = false;
       btnPair1.classList.remove("button-active-fail");
       btnPair2.classList.remove("button-active-fail");
     }, 1000);
@@ -122,7 +122,7 @@ selectDif.addEventListener("click", () => {
   }
 });
 const checkCustom = () => {
-  if ((rowInput.value * colInput.value) % 2 === 0) {
+  if ((rowInput.value * colInput.value) % 2 === 0 && rowInput.value!=0 && colInput.value!=0) {
     changeInputText();
     createButtons(row, column);
     setPairsToButtons();
