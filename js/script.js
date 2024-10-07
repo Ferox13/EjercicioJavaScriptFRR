@@ -60,6 +60,8 @@ const checkPairs = () => {
     }, 1000);
   } else {
     failMsg();
+    btnPair1.classList.toggle("button-active-fail");
+    btnPair2.classList.toggle("button-active-fail");
     setTimeout(() => {
       msgTry.innerText = "";
       btnPair1.textContent = "";
@@ -67,6 +69,8 @@ const checkPairs = () => {
       pairOne = 0;
       pairTwo = 0;
       checking=false;
+      btnPair1.classList.remove("button-active-fail");
+      btnPair2.classList.remove("button-active-fail");
     }, 1000);
   }
 };
