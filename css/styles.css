@@ -6,11 +6,13 @@ body {
     background-color: #353935;
     color: white;
 }
-#msgTry{
-margin: 5px;
-color: white;
+
+#msgTry {
+    margin: 5px;
+    color: white;
 
 }
+
 #error {
     display: block;
     color: red;
@@ -59,15 +61,12 @@ color: white;
 }
 
 .button {
-    text-transform: uppercase;
     cursor: pointer;
-    letter-spacing: 4px;
     position: relative;
     background-color: #16a085;
     color: #fff;
     padding: 20px;
     text-align: center;
-    transition-duration: 0.4s;
     overflow: hidden;
     box-shadow: 0 5px 15px #193047;
     border-radius: 4px;
@@ -89,7 +88,7 @@ color: white;
     cursor: pointer;
     letter-spacing: 4px;
     position: relative;
-    color: #fff;
+    color: black;
     padding: 20px;
     text-align: center;
     transition-duration: 0.4s;
@@ -104,6 +103,7 @@ color: white;
     border: 2px solid #000;
     background-color: #27ff00;
 }
+
 .button-active-fail {
     cursor: pointer;
     letter-spacing: 4px;
@@ -123,8 +123,16 @@ color: white;
     border: 2px solid #000;
     background-color: #ff0000;
 }
+.button-active-fail:hover {
+    background-color: #ff0000;
+    box-shadow: none;
+    color: white;
+
+}
 
 
 .button-active:hover {
     background-color: #27ff00;
+    box-shadow: none;
+
 }

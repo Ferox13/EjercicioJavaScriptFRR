@@ -16,13 +16,15 @@ let column = 4;
 let pairOne = 0;
 let pairTwo = 0;
 let checking = false;
-
+//Mensaje de acierto
 const accertMsg = () => {
   msgTry.innerText = "Los números seleccionados son iguales";
 };
+//Mensaje de fallo
 const failMsg = () => {
   msgTry.innerText = "Los números seleccionados son distintos";
 };
+//Metodo para crear los botones
 function createButtons(rows, cols) {
   let contId = 0;
   container.innerHTML = "";
@@ -39,6 +41,7 @@ function createButtons(rows, cols) {
   numTry = 0;
   numIntentos.innerText = numTry;
 }
+//Metodo para comprobar que las parejas son correctas o no
 const checkPairs = () => {
   numTry++;
   numIntentos.innerText = numTry;
@@ -74,13 +77,14 @@ const checkPairs = () => {
     }, 1000);
   }
 };
+//Metodo para crear las parejas que van a ser comprobadas
 const handleButtonClick = (event) => {
   //chekea para que no se pueda clicar mientras estan los 2 botones activos
   if (checking) {
     return;
   }
-
   const button = event.target;
+  button.classList.remove("button:hover");
   if (pairTwo === 0 && pairOne != 0 && button !== btnPair1) {
     pairTwo = parseInt(button.target);
     btnPair2 = button;
@@ -98,18 +102,19 @@ const handleButtonClick = (event) => {
     checkPairs();
   }
 };
-
+//Inicializa el texto de los input
 const initInputText = () => {
   rowInput.value = row;
   colInput.value = column;
 };
+//Cambia el texto de los input
 const changeInputText = () => {
   row = rowInput.value;
   column = colInput.value;
 };
-
+//Crea los botones
 createButtons(row, column);
-
+//Escucha al bottón de seleccionar dificultad por si es pulsado y la cambia.
 selectDif.addEventListener("click", () => {
   error.textContent = "";
   if (difficulty === "custom") {
@@ -121,8 +126,13 @@ selectDif.addEventListener("click", () => {
     setPairsToButtons();
   }
 });
+//Comprueba que la dificultad custom es par y le asigna las parejas
 const checkCustom = () => {
-  if ((rowInput.value * colInput.value) % 2 === 0 && rowInput.value!=0 && colInput.value!=0) {
+  if (
+    (rowInput.value * colInput.value) % 2 === 0 &&
+    rowInput.value != 0 &&
+    colInput.value != 0
+  ) {
     changeInputText();
     createButtons(row, column);
     setPairsToButtons();
@@ -130,6 +140,7 @@ const checkCustom = () => {
     error.textContent = "Tiene que ser un número par";
   }
 };
+//Cuando cambias de dificultad en el radiobutton, comprueba en cual está para asignar el número a los inputs y habilitarlos o no.
 const checkDifficulty = () => {
   const radioButtons = document.querySelectorAll('input[type="radio"]');
   radioButtons.forEach((radio) => {
@@ -162,15 +173,19 @@ const checkDifficulty = () => {
     });
   });
 };
+//Metodo para habilitar los inputs para la dificultad custom
 const enableInputs = () => {
   rowInput.disabled = false;
   colInput.disabled = false;
 };
+//Método para desabilitar los inputs de la dificultad custom
 const disabledInputs = () => {
   rowInput.disabled = true;
   colInput.disabled = true;
 };
+//Compruebo la dificultad antes de empezar
 checkDifficulty();
+//Genera las parejas y le hace un shuffle al array para que se asignes aleatoriamente
 const generatePairs = () => {
   const pairs = (row * column) / 2;
   numOfPairs = pairs;
@@ -188,6 +203,7 @@ const generatePairs = () => {
 
   return numbers;
 };
+//Asigna las parejas de números a los botones
 const setPairsToButtons = () => {
   let nums = generatePairs();
   const buttons = document.querySelectorAll("button:not(#customDifBtn)");
