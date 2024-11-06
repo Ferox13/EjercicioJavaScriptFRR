@@ -6,6 +6,7 @@ const selectDif = document.getElementById("customDifBtn");
 const numIntentos = document.getElementById("intentos");
 const numParejas = document.getElementById("parejas");
 const msgTry = document.getElementById("msgTry");
+const btnContainer= document.getElementById("button-container");
 let btnPair1;
 let btnPair2;
 let numTry = 0;
@@ -26,6 +27,7 @@ const failMsg = () => {
 };
 //Metodo para crear los botones
 function createButtons(rows, cols) {
+  btnContainer.style.gridTemplateColumns = 'repeat(' + column + ', 1fr)';
   let contId = 0;
   container.innerHTML = "";
   for (let i = 0; i < rows; i++) {
@@ -130,8 +132,7 @@ selectDif.addEventListener("click", () => {
 const checkCustom = () => {
   if (
     (rowInput.value * colInput.value) % 2 === 0 &&
-    rowInput.value != 0 &&
-    colInput.value != 0
+    rowInput.value > 0 && colInput.value > 0 
   ) {
     changeInputText();
     createButtons(row, column);
