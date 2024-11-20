@@ -51,7 +51,6 @@ body {
 
 #button-container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
     gap: 10px;
 }
 
@@ -135,4 +134,8 @@ body {
     background-color: #27ff00;
     box-shadow: none;
 
+}
+
+#msgTry{
+    text-align: center;
 }
