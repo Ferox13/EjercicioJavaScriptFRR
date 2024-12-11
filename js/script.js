@@ -128,22 +128,29 @@ selectDif.addEventListener("click", () => {
     setPairsToButtons();
   }
 });
-//Comprueba que la dificultad custom es par y positiva y le asigna las parejas
+//Comprueba que la dificultad custom es par y le asigna las parejas
 const checkCustom = () => {
-  if (
-    (rowInput.value * colInput.value) % 2 === 0 &&
-    rowInput.value > 0 &&
-    colInput.value > 0 &&
-    Number.isInteger(Number(rowInput.value)) &&
-    Number.isInteger(Number(colInput.value))
+  const rows = Number(rowInput.value);
+  const cols = Number(colInput.value);
+  const totalPairs = rows * cols;
+
+  if (totalPairs > 64) {
+    error.textContent = "El numero máximo de parejas es 32";
+  } else if (
+    totalPairs % 2 !== 0 ||
+    rows <= 0 ||
+    cols <= 0 ||
+    !Number.isInteger(rows) ||
+    !Number.isInteger(cols)
   ) {
+    error.textContent =
+      rows <= 0 || cols <= 0
+        ? "Los números deben ser positivos"
+        : "Tiene que ser un número par";
+  } else {
     changeInputText();
     createButtons(row, column);
     setPairsToButtons();
-  } else if (rowInput.value <= 0 || colInput.value <= 0) {
-    error.textContent = "Los números deben ser positivos";
-  } else {
-    error.textContent = "Tiene que ser un número par";
   }
 };
 //Cuando cambias de dificultad en el radiobutton, comprueba en cual está para asignar el número a los inputs y habilitarlos o no.
