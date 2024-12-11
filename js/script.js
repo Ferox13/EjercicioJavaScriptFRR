@@ -6,7 +6,7 @@ const selectDif = document.getElementById("customDifBtn");
 const numIntentos = document.getElementById("intentos");
 const numParejas = document.getElementById("parejas");
 const msgTry = document.getElementById("msgTry");
-const btnContainer= document.getElementById("button-container");
+const btnContainer = document.getElementById("button-container");
 let btnPair1;
 let btnPair2;
 let numTry = 0;
@@ -27,7 +27,7 @@ const failMsg = () => {
 };
 //Metodo para crear los botones
 function createButtons(rows, cols) {
-  btnContainer.style.gridTemplateColumns = 'repeat(' + column + ', 1fr)';
+  btnContainer.style.gridTemplateColumns = "repeat(" + column + ", 1fr)";
   let contId = 0;
   container.innerHTML = "";
   for (let i = 0; i < rows; i++) {
@@ -128,15 +128,20 @@ selectDif.addEventListener("click", () => {
     setPairsToButtons();
   }
 });
-//Comprueba que la dificultad custom es par y le asigna las parejas
+//Comprueba que la dificultad custom es par y positiva y le asigna las parejas
 const checkCustom = () => {
   if (
     (rowInput.value * colInput.value) % 2 === 0 &&
-    rowInput.value > 0 && colInput.value > 0 
+    rowInput.value > 0 &&
+    colInput.value > 0 &&
+    Number.isInteger(Number(rowInput.value)) &&
+    Number.isInteger(Number(colInput.value))
   ) {
     changeInputText();
     createButtons(row, column);
     setPairsToButtons();
+  } else if (rowInput.value <= 0 || colInput.value <= 0) {
+    error.textContent = "Los números deben ser positivos";
   } else {
     error.textContent = "Tiene que ser un número par";
   }

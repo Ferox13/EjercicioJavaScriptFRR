@@ -122,6 +122,7 @@ body {
     border: 2px solid #000;
     background-color: #ff0000;
 }
+
 .button-active-fail:hover {
     background-color: #ff0000;
     box-shadow: none;
@@ -136,6 +137,10 @@ body {
 
 }
 
-#msgTry{
+#msgTry {
+    display: flex;
+    justify-content: center;
+    margin-left: 5%;
     text-align: center;
+
 }
